@@ -11,6 +11,8 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import authRoutes from './routes/authRoutes.js';
 import employeeRoutes from './routes/employeeRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
+import activityRoutes from './routes/activityRoutes.js';
+import announcementRoutes from './routes/announcementRoutes.js';
 
 // Load env vars
 dotenv.config({ path: '../.env' }); // path relative to where server runs, but since we'll run from server dir, let's just use regular config if .env is in server, or default to root
@@ -52,6 +54,8 @@ const API_VERSION = '/api/v1';
 app.use(`${API_VERSION}/auth`, authRoutes);
 app.use(`${API_VERSION}/employees`, employeeRoutes);
 app.use(`${API_VERSION}/dashboard`, dashboardRoutes);
+app.use(`${API_VERSION}/activities`, activityRoutes);
+app.use(`${API_VERSION}/announcements`, announcementRoutes);
 
 // Health check route
 app.get(`${API_VERSION}/health`, (req, res) => {

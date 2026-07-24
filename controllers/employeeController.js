@@ -33,7 +33,7 @@ export const getEmployee = async (req, res) => {
 // @access  Private
 export const createEmployee = async (req, res) => {
     try {
-        const employee = await employeeService.createEmployee(req.body);
+        const employee = await employeeService.createEmployee(req.body, req.user);
         return successResponse(res, 201, 'Employee created successfully', employee);
     } catch (error) {
         if (error.code === 11000) {
@@ -48,7 +48,7 @@ export const createEmployee = async (req, res) => {
 // @access  Private
 export const updateEmployee = async (req, res) => {
     try {
-        const employee = await employeeService.updateEmployee(req.params.id, req.body);
+        const employee = await employeeService.updateEmployee(req.params.id, req.body, req.user);
         if (!employee) {
             return errorResponse(res, 404, 'Employee not found');
         }
@@ -63,7 +63,7 @@ export const updateEmployee = async (req, res) => {
 // @access  Private/Admin
 export const deleteEmployee = async (req, res) => {
     try {
-        const employee = await employeeService.deleteEmployee(req.params.id);
+        const employee = await employeeService.deleteEmployee(req.params.id, req.user);
         if (!employee) {
             return errorResponse(res, 404, 'Employee not found');
         }
